@@ -1,38 +1,44 @@
-/* Sidebar Styles */
 .sidebar {
   position: fixed;
-  left: -350px; /* Move sidebar to the left */
   top: 0;
-  width: 300px;
-  height: 100%;
-  background: #e4e6e9;
-  box-shadow: 2px 0 5px rgba(14, 13, 13, 0.73); /* Shadow on the right side */
+  left: -250px; /* Initially hidden */
+  width: 250px;
+  height: 100vh;
+  background-color: #ffffff; /* Updated background color */
   transition: left 0.3s ease;
-  z-index: 999;
-  padding: 20px;
-  overflow-y: auto; /* Enable vertical scrolling */
+  z-index: 1000; /* Ensure it's above other content */
+  overflow-y: auto; /* Allow scrolling if content is long */
+  padding-top: 60px; /* Add padding to avoid overlap with navbar */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Add shadow for better visibility */
 }
 
 .sidebar.open {
-  left: 0; /* Show sidebar when open */
+  left: 0; /* Show sidebar */
 }
 
 .sidebar-toggle {
   position: fixed;
-  left: 20px; /* Move toggle button to the left */
-  top: 20px;
-  z-index: 1000;
-  background: #0f4ea0;
-  color: #e9e8f2;
-  border: 'none';
-  padding: '10px 15px';
-  border-radius: '5px';
-  cursor: 'pointer';
+  top: 10px;
+  left: 20px;
+  z-index: 1001; /* Ensure it's above the sidebar */
+  background-color: transparent; /* Remove button background */
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.sidebar.dark-mode {
+  background-color: #333;
+  color: #fff;
+}
+
+.sidebar.dark-mode a {
+  color: #fff;
 }
 
 .sidebar ul {
-  list-style: none;
-  padding: 0;
+  list-style-type: none;
+  padding: 5px 20px;
 }
 
 .sidebar ul li {
@@ -41,49 +47,22 @@
 
 .sidebar ul li a {
   text-decoration: none;
-  color: #067aee;
+  color: #007bff;
 }
 
-.sidebar ul li button {
-  background: none;
-  border: none;
-  color: #044f9f;
-  cursor: pointer;
+.sidebar ul li a:hover {
+  text-decoration: underline;
 }
 
-/* Dark Mode Styles */
-.dark-mode {
-  background-color: #333;
-  color: #fff;
+.sidebar h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #333; /* Updated text color */
 }
 
-.dark-mode ul li a {
-  color: #fff;
-}
-
-.dark-mode ul li button {
-  color: #fff;
-}
-
-/* Adjust Sidebar Width */
-.sidebar {
-  width: 350px; /* Increase width */
-}
-
-/* Custom Scrollbar */
-.sidebar::-webkit-scrollbar {
-  width: 8px;
-}
-
-.sidebar::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-.sidebar::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
-}
-
-.sidebar::-webkit-scrollbar-thumb:hover {
-  background: #555;
+/* Icon styles */
+.sidebar button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }

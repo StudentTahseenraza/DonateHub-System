@@ -1,0 +1,35 @@
+/* NotificationCenter.css */
+.notification-center {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+  }
+  
+  .notification-center h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+  }
+  
+  .notification-item {
+    background-color: var(--background-color);
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    transition: var(--transition);
+  }
+  
+  .notification-item:hover {
+    transform: translateX(10px);
+    box-shadow: var(--hover-shadow);
+  }
+  
+  .notification-item p {
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  .notification-item span {
+    font-size: 0.9em;
+    color: #666;
+  }

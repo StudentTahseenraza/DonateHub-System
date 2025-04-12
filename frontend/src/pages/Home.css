@@ -1,0 +1,104 @@
+/* Home.css */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.hero-section {
+  background-image: url('../assets/Home2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 750px;
+  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: rgb(242, 245, 246);
+  position: relative;
+  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.5);
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  padding: 20px;
+}
+
+.hero-section h1 {
+  font-size: 4.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-shadow: 10px 10px 8px rgba(0, 0, 0, 0.5);
+}
+
+.hero-section .lead {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-shadow: 10px 10px 8px rgba(0, 0, 0, 0.5);
+}
+
+.hero-buttons .btn {
+  margin: 10px;
+  padding: 12px 30px;
+  font-size: 1.2rem;
+  border-radius: 50px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.main-content {
+  flex: 1;
+  width: 100%;
+}
+
+.feature-card, .step-card, .testimonial-card {
+  background-color: rgb(29, 108, 128);
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 10px 12px rgba(15, 14, 14, 0.938);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+}
+
+.feature-card:hover, .step-card:hover, .testimonial-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+}
+
+.how-it-works-section {
+  background-color: #f8f9fa;
+}
+
+.testimonials-section {
+  background-color: #f1f5f7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero-section .lead {
+    font-size: 1.2rem;
+  }
+  
+  .hero-buttons .btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+}

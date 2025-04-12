@@ -1,0 +1,22 @@
+/* DeliveryOptions.css
+.delivery-options {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+  }
+  
+  .delivery-options h1 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+  }
+  
+  .delivery-options label {
+    display: block;
+    margin: 10px 0;
+    font-weight: bold;
+  }
+  
+  .delivery-options input {
+    margin-right: 10px;
+  } */

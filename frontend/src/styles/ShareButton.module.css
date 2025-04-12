@@ -1,0 +1,17 @@
+/* ShareButton.css */
+.share-button {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: var(--transition);
+    box-shadow: var(--box-shadow);
+  }
+  
+  .share-button:hover {
+    background-color: #e0a800;
+    transform: translateY(-2px);
+    box-shadow: var(--hover-shadow);
+  }

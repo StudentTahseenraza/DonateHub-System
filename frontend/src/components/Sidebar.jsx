@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Settings from './Settings';
 import './Sidebar.css';
+import logo from '../assets/menu.svg'; // Import your logo image
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Import FontAwesome
+import { faCog, faMoon, faSun } from '@fortawesome/free-solid-svg-icons'; // Import icons
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,41 +13,40 @@ const Sidebar = () => {
   const [showSettings, setShowSettings] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
 
-  // Fetch notifications
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const foodRes = await axios.get('/api/food-donations', {
-          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        const token = localStorage.getItem('token');
+        const foodRes = await axios.get('http://localhost:5000/api/food-donations', {
+          headers: { Authorization: `Bearer ${token}` },
         });
-        const bookRes = await axios.get('/api/book-donations', {
-          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        const bookRes = await axios.get('http://localhost:5000/api/book-donations', {
+          headers: { Authorization: `Bearer ${token}` },
         });
-  
-        const foodNotifications = foodRes.data.slice(0, 3).map((donation) => ({
+
+        const foodNotifications = foodRes.data.map((donation) => ({
           type: 'Food Donation',
           item: donation.itemName,
           donor: donation.donorId.name,
         }));
-  
-        const bookNotifications = bookRes.data.slice(0, 3).map((donation) => ({
+
+        const bookNotifications = bookRes.data.map((donation) => ({
           type: 'Book Donation',
           item: donation.itemName,
           donor: donation.donorId.name,
         }));
-  
+
         setNotifications([...foodNotifications, ...bookNotifications]);
       } catch (err) {
-        console.error('Error fetching notifications:', err);
+        console.error('Error fetching notifications:', err.response?.data || err.message);
       }
     };
-  
+
     if (isOpen) {
       fetchNotifications();
     }
   }, [isOpen]);
 
-  // Toggle Dark Mode
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
     document.body.classList.toggle('dark-mode', !darkMode);
@@ -56,50 +58,21 @@ const Sidebar = () => {
 
   return (
     <>
-      {/* Sidebar Toggle Button */}
-      <button className="sidebar-toggle" onClick={toggleSidebar}>
-        {isOpen ? 'Close' : 'Menu'}
-      </button>
+      {/* Replace the "Menu" button with a logo */}
+      <div className="sidebar-toggle" onClick={toggleSidebar}>
+        <img src={logo} alt="Logo" style={{ width: '40px', height: '40px', cursor: 'pointer' }} />
+      </div>
 
-      {/* Sidebar */}
       <div className={`sidebar ${isOpen ? 'open' : ''} ${darkMode ? 'dark-mode' : ''}`}>
         <h3>Quick Links</h3>
         <ul>
-          <li>
-            <Link to="/" onClick={toggleSidebar}>
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to="/donate" onClick={toggleSidebar}>
-              Donate
-            </Link>
-          </li>
-          <li>
-            <Link to="/request" onClick={toggleSidebar}>
-              Request
-            </Link>
-          </li>
-          <li>
-            <Link to="/leaderboard" onClick={toggleSidebar}>
-              Leaderboard
-            </Link>
-          </li>
-          <li>
-            <Link to="/about" onClick={toggleSidebar}>
-              About
-            </Link>
-          </li>
-          <li>
-            <Link to="/mission" onClick={toggleSidebar}>
-              Mission
-            </Link>
-          </li>
-          <li>
-            <Link to="/books" onClick={toggleSidebar}>
-              Books
-            </Link>
-          </li>
+          <li><Link to="/" onClick={toggleSidebar}>Home</Link></li>
+          <li><Link to="/donate" onClick={toggleSidebar}>Donate</Link></li>
+          <li><Link to="/request" onClick={toggleSidebar}>Request</Link></li>
+          <li><Link to="/leaderboard" onClick={toggleSidebar}>Leaderboard</Link></li>
+          <li><Link to="/about" onClick={toggleSidebar}>About</Link></li>
+          <li><Link to="/mission" onClick={toggleSidebar}>Mission</Link></li>
+          <li><Link to="/profile" onClick={toggleSidebar}>My Profile</Link></li>
         </ul>
 
         <h3>Notifications</h3>
@@ -107,8 +80,7 @@ const Sidebar = () => {
           {notifications.length > 0 ? (
             notifications.map((notification, index) => (
               <li key={index} style={{ marginBottom: '10px' }}>
-                <strong>{notification.type}:</strong> {notification.item} by{' '}
-                {notification.donor || notification.receiver}
+                <strong>{notification.type}:</strong> {notification.item} by {notification.donor}
               </li>
             ))
           ) : (
@@ -116,18 +88,13 @@ const Sidebar = () => {
           )}
         </ul>
 
-        <h3>Profile</h3>
         <ul>
-          <li>
-            <Link to="/profile" onClick={toggleSidebar}>
-              My Profile
-            </Link>
-          </li>
+          {/* <li><Link to="/profile" onClick={toggleSidebar}>My Profile</Link></li> */}
           <li>
             <button
               onClick={() => {
                 localStorage.removeItem('token');
-                window.location.href = '/login';
+                window.location.href = '/auth';
               }}
             >
               Logout
@@ -135,35 +102,21 @@ const Sidebar = () => {
           </li>
         </ul>
 
-        <h3>Settings</h3>
+        <h5>Settings</h5>
         <button
           onClick={() => setShowSettings(!showSettings)}
-          style={{
-            background: '#007bff',
-            color: '#fff',
-            border: 'none',
-            padding: '10px 15px',
-            borderRadius: '5px',
-            cursor: 'pointer',
-          }}
+          style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}
         >
-          {showSettings ? 'Hide Settings' : 'Show Settings'}
+          <FontAwesomeIcon icon={faCog} size="2x" color={darkMode ? '#fff' : '#007bff'} /> {/* Settings icon */}
         </button>
         {showSettings && <Settings />}
 
-        <h3>Dark Mode</h3>
+        <h5>Dark Mode</h5>
         <button
           onClick={toggleDarkMode}
-          style={{
-            background: darkMode ? '#333' : '#007bff',
-            color: '#fff',
-            border: 'none',
-            padding: '10px 15px',
-            borderRadius: '5px',
-            cursor: 'pointer',
-          }}
+          style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}
         >
-          {darkMode ? 'Light Mode' : 'Dark Mode'}
+          <FontAwesomeIcon icon={darkMode ? faSun : faMoon} size="2x" color={darkMode ? '#ffcc00' : '#333'} /> {/* Dark/Light mode icon */}
         </button>
       </div>
     </>

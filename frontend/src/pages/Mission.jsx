@@ -1,10 +1,10 @@
-import React from 'react';
+// import React from 'react';
 import img1 from '../assets/img1.jpg'; // Add images in the assets folder
 import img2 from '../assets/img2.jpg'; // Add images in the assets folder
 
 const Mission = () => {
   return (
-    <div className="container mt-5">
+    <div className="main-content">
       <h1 className="text-center mb-4">Our Mission</h1>
       <div className="row">
         <div className="col-md-6">

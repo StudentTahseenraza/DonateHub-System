@@ -66,3 +66,11 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+
+/* Global CSS to add padding to the main content */
+.main-content {
+  padding-top: 110px; /* Adjust this value based on your navbar's height */
+  padding-left: 20px;
+  padding-right: 20px;
+}
+

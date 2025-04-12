@@ -1,0 +1,24 @@
+/* ProgressBar.css */
+.progress-bar-container {
+    width: 100%;
+    background-color: var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    height: 20px;
+  }
+  
+  .progress-bar {
+    height: 100%;
+    background-color: var(--primary-color);
+    transition: width 0.5s ease;
+  }
+  
+  .progress-bar-container span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+  }

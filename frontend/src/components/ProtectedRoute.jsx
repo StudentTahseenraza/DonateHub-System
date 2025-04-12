@@ -1,9 +1,18 @@
-import React from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
+// ProtectedRoute.jsx
+import { useContext } from "react";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { Context } from "../main";
 
 const ProtectedRoute = () => {
-  const token = localStorage.getItem('token'); // Check if user is logged in
-  return token ? <Outlet /> : <Navigate to="/login" />; // Redirect to login if not logged in
+  const { isAuthenticated } = useContext(Context);
+  const location = useLocation();
+
+  if (!isAuthenticated) {
+    // Redirect to /auth while remembering where they came from
+    return <Navigate to="/auth" state={{ from: location }} replace />;
+  }
+
+  return <Outlet />;
 };
 
 export default ProtectedRoute;

@@ -1,0 +1,39 @@
+/* Badges.css */
+.badges-container {
+    background-color: rgb(14, 3, 75);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+  }
+  
+  .badges-container h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+  }
+  
+  .badges-list {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .badge-item {
+    background-color: var(--background-color);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    transition: var(--transition);
+  }
+  
+  .badge-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
+  }
+  
+  .badge-item span {
+    font-size: 2em;
+  }
+  
+  .badge-item p {
+    margin: 0;
+    font-weight: bold;
+  }

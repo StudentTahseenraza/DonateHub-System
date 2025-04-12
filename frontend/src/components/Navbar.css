@@ -1,0 +1,44 @@
+/* Existing Navbar Styles */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1001; /* Higher than sidebar */
+  height: 60px; /* Adjust based on your navbar's height */
+  background-color: #1c75c9; /* Example color */
+  color: white;
+}
+
+/* Additions for NGO Dropdown */
+.nav-item.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #091520; /* Match navbar background */
+  list-style: none;
+  padding: 0.5rem 0;
+  margin: 0;
+  display: none;
+  border: 1px solid #1c2e3f; /* Add a border for contrast */
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-item {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  display: block;
+  transition: background-color 0.3s;
+}
+
+.dropdown-item:hover {
+  background-color: #1c2e3f; /* Darker shade for hover */
+}

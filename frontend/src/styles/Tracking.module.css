@@ -1,0 +1,27 @@
+/* Tracking.css */
+.tracking-container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+  }
+  
+  .tracking-container h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+  }
+  
+  .tracking-status {
+    background-color: var(--background-color);
+    padding: 15px;
+    border-radius: 5px;
+  }
+  
+  .tracking-status p {
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  .tracking-status span {
+    color: var(--primary-color);
+  }
