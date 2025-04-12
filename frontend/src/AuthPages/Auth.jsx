@@ -2,8 +2,8 @@
 import { useContext, useState, useEffect } from "react";
 import { Context } from "../main";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
-import Register from "../Logcomponents/Register";
-import Login from "../Logcomponents/Login";
+import Login from "./Login";
+import Register from "./Register";
 
 const Auth = () => {
   const { isAuthenticated } = useContext(Context);
