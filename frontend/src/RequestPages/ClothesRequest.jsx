@@ -6,7 +6,7 @@ const FoodRequest = () => {
     <div
       className="main-content"
       style={{
-        // backgroundImage: `url(${foodBg})`, // Use the imported image
+        backgroundImage: `url(${foodBg})`, // Use the imported image
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",

@@ -31,7 +31,7 @@ const Navbar = () => {
       <div className="container-fluid">
         <nav className="navbar d-flex justify-content-start px-5">
           <h2 className="navbar-brand fw-bold ms-5 text-white" to="/">
-            Wasted Treasure
+           Unused<strong >2</strong>Useful
           </h2>
         </nav>
         <button
@@ -181,7 +181,7 @@ const Navbar = () => {
 
             <li className="nav-item">
               <Link className="nav-link" to="/auth">
-                Login/Signup
+                Login
               </Link>
             </li>
           </ul>

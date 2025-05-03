@@ -9,7 +9,7 @@ const Home = () => {
       {/* Hero Section with Background Image */}
       <div className="hero-section">
         <div className="hero-content">
-          <h1>Welcome to Wasted Treasure</h1>
+          <h1>Welcome to Unused2Useful</h1>
           <h2 className="lead">Reduce waste, help others, and make a difference!</h2>
           <div className="hero-buttons">
             <Link to="/donate" className="btn btn-primary btn-lg me-3">

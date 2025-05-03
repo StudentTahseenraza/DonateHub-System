@@ -1,449 +1,8 @@
-// import { useState } from 'react';
-// import LocationAutocomplete from './LocationAutocomplete';
-// import axios from 'axios';
-
-// const RequestForm = () => {
-//   const [location, setLocation] = useState('');
-// <LocationAutocomplete onPlaceSelected={(place) => setLocation(place)} />
-//   const [formData, setFormData] = useState({
-//     category: '',
-//     itemName: '',
-//     description: '',
-//     location: '',
-//   });
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData({ ...formData, [name]: value });
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       const response = await axios.post(
-//         'http://localhost:5000/api/request',
-//         {
-//           category: formData.category,
-//           itemName: formData.itemName,
-//           description: formData.description,
-//           location: formData.location,
-//         },
-//         {
-//           headers: {
-//             Authorization: `Bearer ${localStorage.getItem('token')}`,
-//           },
-//         }
-//       );
-//       console.log('Request submitted:', response.data);
-//       alert('Request submitted successfully!');
-//     } catch (err) {
-//       console.error('Error submitting request:', err.response?.data || err.message);
-//       alert('Failed to submit request. Please try again.');
-//     }
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit} className="p-4 border rounded shadow-sm">
-//       <h3 className="mb-4">Request Items</h3>
-//       <div className="mb-3">
-//         <label className="form-label">Category</label>
-//         <select
-//           name="category"
-//           className="form-select"
-//           value={formData.category}
-//           onChange={handleChange}
-//           required
-//         >
-//           <option value="">Select Category</option>
-//           <option value="food">Food</option>
-//           <option value="clothes">Clothes & Footwear</option>
-//           <option value="books">Books & Stationery</option>
-//           <option value="furniture">Furniture & Gadgets</option>
-//           <option value="compost">Animal Feed & Compost Waste</option>
-//         </select>
-//       </div>
-//       <div className="mb-3">
-//         <label className="form-label">Item Name</label>
-//         <input
-//           type="text"
-//           name="itemName"
-//           className="form-control"
-//           value={formData.itemName}
-//           onChange={handleChange}
-//           required
-//         />
-//       </div>
-//       <div className="mb-3">
-//         <label className="form-label">Description</label>
-//         <textarea
-//           name="description"
-//           className="form-control"
-//           value={formData.description}
-//           onChange={handleChange}
-//           required
-//         />
-//       </div>
-//       <div className="mb-3">
-//         <label className="form-label">Location</label>
-//         <input
-//           type="text"
-//           name="location"
-//           className="form-control"
-//           value={formData.location}
-//           onChange={handleChange}
-//           required
-//         />
-//       </div>
-//       <button type="submit" className="btn btn-success w-100">Submit</button>
-//     </form>
-//   );
-// };
-
-// export default RequestForm;
-
-
-// import { useState } from "react";
-// import axios from "axios";
-// import LocationAutocomplete from "./LocationAutocomplete";
-// import DeliveryOptions from "./DeliveryOptions";
-
-// const RequestForm = ({ category }) => {
-//   const [location, setLocation] = useState("");
-//   const [deliveryOption, setDeliveryOption] = useState(null);
-//   const [formData, setFormData] = useState({
-//     category: category,
-//     itemName: "",
-//     description: "",
-//     location: "",
-//     condition: "", // Category-specific field
-//     quantity: "", // For clothes, books, etc.
-//   });
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData({ ...formData, [name]: value });
-//   };
-
-//   const handleDeliverySelection = (option) => {
-//     setDeliveryOption(option);
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-
-//     if (!deliveryOption) {
-//       alert("Please select a delivery option before submitting.");
-//       return;
-//     }
-
-//     try {
-//       const response = await axios.post(
-//         "http://localhost:5000/api/request",
-//         {
-//           category: formData.category,
-//           itemName: formData.itemName,
-//           description: formData.description,
-//           location: formData.location,
-//           condition: formData.condition, // Category-specific field
-//           quantity: formData.quantity, // For clothes, books, etc.
-//           deliveryOption: deliveryOption,
-//         },
-//         {
-//           headers: {
-//             Authorization: `Bearer ${localStorage.getItem("token")}`,
-//           },
-//         }
-//       );
-//       console.log("Request submitted:", response.data);
-//       alert("Request submitted successfully!");
-//     } catch (err) {
-//       console.error("Error submitting request:", err.response?.data || err.message);
-//       alert("Failed to submit request. Please try again.");
-//     }
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit} className="p-4 border rounded shadow-sm">
-//       <h3 className="mb-4">Request {category}</h3>
-
-//       {/* Common Fields */}
-//       <div className="mb-3">
-//         <label className="form-label">Item Name</label>
-//         <input
-//           type="text"
-//           name="itemName"
-//           className="form-control"
-//           value={formData.itemName}
-//           onChange={handleChange}
-//           required
-//         />
-//       </div>
-
-//       <div className="mb-3">
-//         <label className="form-label">Description</label>
-//         <textarea
-//           name="description"
-//           className="form-control"
-//           value={formData.description}
-//           onChange={handleChange}
-//           required
-//         />
-//       </div>
-
-//       {/* Category-Specific Fields */}
-//       {category === "food" && (
-//         <div className="mb-3">
-//           <label className="form-label">Food Condition</label>
-//           <select
-//             name="condition"
-//             className="form-select"
-//             value={formData.condition}
-//             onChange={handleChange}
-//             required
-//           >
-//             <option value="">Select Condition</option>
-//             <option value="fresh">Fresh</option>
-//             <option value="packed">Packed</option>
-//             <option value="expired">Expired (for animal feed)</option>
-//           </select>
-//         </div>
-//       )}
-
-//       {category === "clothes" && (
-//         <div className="mb-3">
-//           <label className="form-label">Clothes Condition</label>
-//           <select
-//             name="condition"
-//             className="form-select"
-//             value={formData.condition}
-//             onChange={handleChange}
-//             required
-//           >
-//             <option value="">Select Condition</option>
-//             <option value="new">New</option>
-//             <option value="used">Used (Good Condition)</option>
-//             <option value="damaged">Damaged (for recycling)</option>
-//           </select>
-//         </div>
-//       )}
-
-//       {category === "books" && (
-//         <div className="mb-3">
-//           <label className="form-label">Book Condition</label>
-//           <select
-//             name="condition"
-//             className="form-select"
-//             value={formData.condition}
-//             onChange={handleChange}
-//             required
-//           >
-//             <option value="">Select Condition</option>
-//             <option value="new">New</option>
-//             <option value="used">Used (Good Condition)</option>
-//             <option value="damaged">Damaged (for recycling)</option>
-//           </select>
-//         </div>
-//       )}
-
-//       {/* Location Field */}
-//       <div className="mb-3">
-//         <label className="form-label">Location</label>
-//         <LocationAutocomplete onPlaceSelected={(place) => setLocation(place)} />
-//         {/* <input
-//           type="text"
-//           name="location"
-//           className="form-control"
-//           value={formData.location}
-//           onChange={handleChange}
-//           required
-//         /> */}
-//       </div>
-
-//       {/* Delivery Options */}
-//       <div className="mb-3">
-//         <h4>Select Delivery Option</h4>
-//         <DeliveryOptions onSelect={handleDeliverySelection} />
-//       </div>
-
-//       <button type="submit" className="btn btn-success w-100" disabled={!deliveryOption}>
-//         Submit Request
-//       </button>
-//     </form>
-//   );
-// };
-
-// export default RequestForm;
-
-// import { useState } from "react";
-// import axios from "axios";
-// import DeliveryOptions from "./DeliveryOptions";
-
-// const RequestForm = ({ category }) => {
-//   const [deliveryOption, setDeliveryOption] = useState(null);
-//   const [formData, setFormData] = useState({
-//     category: category,
-//     itemName: "",
-//     description: "",
-//     location: "", // Simple text input for location
-//     condition: "",
-//     quantity: "",
-//   });
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData({ ...formData, [name]: value });
-//   };
-
-//   const handleDeliverySelection = (option) => {
-//     setDeliveryOption(option);
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-
-//     if (!deliveryOption) {
-//       alert("Please select a delivery option before submitting.");
-//       return;
-//     }
-
-//     try {
-//       const response = await axios.post(
-//         "http://localhost:5000/api/requests",
-//         {
-//           ...formData,
-//           deliveryOption,
-//         },
-//         {
-//           headers: {
-//             Authorization: `Bearer ${localStorage.getItem("token")}`,
-//           },
-//         }
-//       );
-//       console.log("Request submitted:", response.data);
-//       alert("Request submitted successfully!");
-//     } catch (err) {
-//       console.error("Error submitting request:", err.response?.data || err.message);
-//       alert("Failed to submit request. Please try again.");
-//     }
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit} className="p-4 border rounded shadow-sm">
-//       <h3 className="mb-4">Request {category}</h3>
-
-//       {/* Common Fields */}
-//       <div className="mb-3">
-//         <label className="form-label">Item Name</label>
-//         <input
-//           type="text"
-//           name="itemName"
-//           className="form-control"
-//           value={formData.itemName}
-//           onChange={handleChange}
-//           required
-//         />
-//       </div>
-
-//       <div className="mb-3">
-//         <label className="form-label">Description</label>
-//         <textarea
-//           name="description"
-//           className="form-control"
-//           value={formData.description}
-//           onChange={handleChange}
-//           required
-//         />
-//       </div>
-
-//       {/* Category-Specific Fields */}
-//       {category === "food" && (
-//         <div className="mb-3">
-//           <label className="form-label">Food Condition</label>
-//           <select
-//             name="condition"
-//             className="form-select"
-//             value={formData.condition}
-//             onChange={handleChange}
-//             required
-//           >
-//             <option value="">Select Condition</option>
-//             <option value="fresh">Fresh</option>
-//             <option value="packed">Packed</option>
-//             <option value="expired">Expired (for animal feed)</option>
-//           </select>
-//         </div>
-//       )}
-
-//       {category === "clothes" && (
-//         <div className="mb-3">
-//           <label className="form-label">Clothes Condition</label>
-//           <select
-//             name="condition"
-//             className="form-select"
-//             value={formData.condition}
-//             onChange={handleChange}
-//             required
-//           >
-//             <option value="">Select Condition</option>
-//             <option value="new">New</option>
-//             <option value="used">Used (Good Condition)</option>
-//             <option value="damaged">Damaged (for recycling)</option>
-//           </select>
-//         </div>
-//       )}
-
-//       {category === "books" && (
-//         <div className="mb-3">
-//           <label className="form-label">Book Condition</label>
-//           <select
-//             name="condition"
-//             className="form-select"
-//             value={formData.condition}
-//             onChange={handleChange}
-//             required
-//           >
-//             <option value="">Select Condition</option>
-//             <option value="new">New</option>
-//             <option value="used">Used (Good Condition)</option>
-//             <option value="damaged">Damaged (for recycling)</option>
-//           </select>
-//         </div>
-//       )}
-
-//       {/* Location Field */}
-//       <div className="mb-3">
-//         <label className="form-label">Location</label>
-//         <input
-//           type="text"
-//           name="location"
-//           className="form-control"
-//           value={formData.location}
-//           onChange={handleChange}
-//           required
-//         />
-//       </div>
-
-//       {/* Delivery Options */}
-//       <div className="mb-3">
-//         <DeliveryOptions onSelect={handleDeliverySelection} />
-//       </div>
-
-//       <button type="submit" className="btn btn-success w-100" disabled={!deliveryOption}>
-//         Submit Request
-//       </button>
-//     </form>
-//   );
-// };
-
-// export default RequestForm;
-
-
-
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { io } from "socket.io-client";
 import DeliveryOptions from "./DeliveryOptions";
-import { jwtDecode } from "jwt-decode"; // Use named import instead of default
+import { jwtDecode } from "jwt-decode";
 import foodLogo from "../assets/food-logo.png";
 import clothesLogo from "../assets/clothes-logo.jpeg";
 import booksLogo from "../assets/books-logo.png";
@@ -558,7 +117,7 @@ const RequestForm = ({ category }) => {
         return;
       }
 
-      const decodedToken = jwtDecode(token); // Use named export
+      const decodedToken = jwtDecode(token);
       const receiverId = decodedToken.userId;
 
       const response = await axios.post(
@@ -567,7 +126,7 @@ const RequestForm = ({ category }) => {
           receiverId,
           deliveryOption,
           ngoId: deliveryOption === "NGO" ? selectedNGO.id : undefined,
-          requesterLocation: userLocation, // Add this
+          requesterLocation: userLocation,
         },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -583,9 +142,16 @@ const RequestForm = ({ category }) => {
     }
   };
 
-  const filteredDonations = donations.filter((donation) =>
-    donation.itemName.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredDonations = donations.filter((donation) => {
+    const matchesSearch = donation.itemName.toLowerCase().includes(searchQuery.toLowerCase());
+    const isExpired = donation.category === "food" && donation.expiryDate && new Date() > new Date(donation.expiryDate);
+    
+    // For food items, check expiration. For other categories, just check availability
+    if (donation.category === "food") {
+      return matchesSearch && donation.isAvailable && !isExpired;
+    }
+    return matchesSearch && donation.isAvailable;
+  });
 
   const getCategoryLogo = (category) => {
     switch (category) {
@@ -617,52 +183,45 @@ const RequestForm = ({ category }) => {
 
       <div className="row">
         {!loading && !error && filteredDonations.length > 0 ? (
-          filteredDonations.map((donation) => {
-            const isExpired = donation.category === "food" && donation.expiryDate && new Date() > new Date(donation.expiryDate);
-            const isUnavailable = !donation.isAvailable || isExpired;
-
-            return (
-              <div key={donation._id} className="col-md-4 mb-4">
-                <div
-                  className="card shadow-sm border-0 rounded-3"
-                  style={{ background: getRandomColor(), color: "#FFFFFF" }}
-                >
-                  <div className="card-body">
-                    <div className="d-flex align-items-center mb-3">
-                      <img
-                        src={getCategoryLogo(donation.category)}
-                        alt={donation.category}
-                        style={{ width: "40px", height: "40px", marginRight: "10px" }}
-                      />
-                      <h5 className="card-title">{donation.itemName}</h5>
-                    </div>
-                    <p className="card-text">{donation.description}</p>
-                    <p className="card-text"><small>Location: {donation.location}</small></p>
-                    {donation.photo && (
-                      <img
-                        src={`http://localhost:5000${donation.photo}`}
-                        alt={donation.itemName}
-                        className="img-fluid rounded mt-3"
-                        style={{ maxHeight: "150px", objectFit: "cover" }}
-                      />
-                    )}
-                    {isUnavailable ? (
-                      <p className="text-danger mt-3">
-                        {isExpired ? "This item has expired and is no longer available." : "This item is no longer available."}
-                      </p>
-                    ) : (
-                      <button
-                        className="btn btn-primary w-100 mt-3"
-                        onClick={() => setSelectedDonation(donation._id)}
-                      >
-                        Request Item
-                      </button>
-                    )}
+          filteredDonations.map((donation) => (
+            <div key={donation._id} className="col-md-4 mb-4">
+              <div
+                className="card shadow-sm border-0 rounded-3"
+                style={{ background: getRandomColor(), color: "#FFFFFF" }}
+              >
+                <div className="card-body">
+                  <div className="d-flex align-items-center mb-3">
+                    <img
+                      src={getCategoryLogo(donation.category)}
+                      alt={donation.category}
+                      style={{ width: "40px", height: "40px", marginRight: "10px" }}
+                    />
+                    <h5 className="card-title">{donation.itemName}</h5>
                   </div>
+                  <p className="card-text">{donation.description}</p>
+                  <p className="card-text"><small>Location: {donation.location}</small></p>
+                  {donation.photo && (
+                    <img
+                      src={`http://localhost:5000${donation.photo}`}
+                      alt={donation.itemName}
+                      className="img-fluid rounded mt-3"
+                      style={{ maxHeight: "150px", objectFit: "cover" }}
+                    />
+                  )}
+                  {!donation.isAvailable ? (
+                    <p className="text-danger mt-3">This item is no longer available.</p>
+                  ) : (
+                    <button
+                      className="btn btn-primary w-100 mt-3"
+                      onClick={() => setSelectedDonation(donation._id)}
+                    >
+                      Request Item
+                    </button>
+                  )}
                 </div>
               </div>
-            );
-          })
+            </div>
+          ))
         ) : (
           !loading && !error && <p className="text-center text-muted">No donations available in this category.</p>
         )}

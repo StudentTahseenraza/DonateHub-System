@@ -30,7 +30,7 @@ const FoodRequest = () => {
         }}
       >
         <h2 className="text-center mb-4" style={{ color: "#fff", textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)" }}>Furniture Request</h2>
-        <RequestForm category="furniture" />
+        <RequestForm category="furnitures" />
       </div>
     </div>
   );
