@@ -1,5 +1,4 @@
 // Home.jsx
-import React from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
 
@@ -39,7 +38,7 @@ const Home = () => {
               <div className="feature-card p-4">
                 <i className="fas fa-hand-holding-heart fa-3x mb-3"></i>
                 <h4>Help Others</h4>
-                <p>Your donations can make a significant impact on someone's life.</p>
+                <p>Your donations can make a significant impact on someones life.</p>
               </div>
             </div>
             <div className="col-md-4 text-center">
@@ -89,13 +88,13 @@ const Home = () => {
             <div className="row">
               <div className="col-md-4">
                 <div className="testimonial-card p-4">
-                  <p>"This platform helped me donate my unused items to people who really needed them. Highly recommended!"</p>
+                  <p>This platform helped me donate my unused items to people who really needed them. Highly recommended!</p>
                   <p className="text-end fw-bold">- Akshay</p>
                 </div>
               </div>
               <div className="col-md-4">
                 <div className="testimonial-card p-4">
-                  <p>I received books for my studies through this platform. It's a lifesaver!</p>
+                  <p>I received books for my studies through this platform. Its a lifesaver!</p>
                   <p className="text-end fw-bold">- Neha</p>
                 </div>
               </div>

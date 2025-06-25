@@ -18,13 +18,13 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://donate-hub-system-x4f5.vercel.app/",
     methods: ["GET", "POST"],
     credentials: true,
   },
 });
 
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(cors({ origin: "https://donate-hub-system-x4f5.vercel.app/", credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
