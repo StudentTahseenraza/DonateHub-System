@@ -36,14 +36,15 @@ const NGODashboard = () => {
   }, []);
 
   return (
+  <div className="main-content">
     <div className="ngo-dashboard">
       <div className="dashboard-header">
         <h1>NGO Dashboard</h1>
-        <div className="header-actions">
+        {/* <div className="header-actions">
           <Link to="/ngo/profile" className="btn btn-primary">
             Edit Profile
           </Link>
-        </div>
+        </div> */}
       </div>
 
       <div className="dashboard-stats">
@@ -123,6 +124,7 @@ const NGODashboard = () => {
         </div>
       </div>
     </div>
+  </div>
   );
 };
 

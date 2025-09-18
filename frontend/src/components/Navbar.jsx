@@ -17,12 +17,6 @@ const Navbar = () => {
     setNGODropdownOpen(!isNGODropdownOpen);
   };
 
-  const handleAdminLogout = () => {
-    localStorage.removeItem("adminToken");
-    setIsAdmin(false);
-    navigate("/");
-  };
-
   return (
     <nav
       className="navbar navbar-expand-lg navbar-dark bg-darkturquoise shadow-sm"
@@ -102,16 +96,6 @@ const Navbar = () => {
                       Dashboard
                     </Link>
                   </li>
-                  <li>
-                    <Link className="dropdown-item" to="/ngo/search">
-                      Search NGOs
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/ngo/top-rated">
-                      Top-Rated NGOs
-                    </Link>
-                  </li>
                 </ul>
               )}
             </li>
@@ -147,16 +131,7 @@ const Navbar = () => {
                       Requests
                     </Link>
                   </li>
-                  <li>
-                    <Link className="dropdown-item" to="/admin/roles">
-                      Roles
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/admin/auditlog">
-                      AuditLog
-                    </Link>
-                  </li>
+                
                   <li>
                     <button
                       className="dropdown-item"
@@ -171,17 +146,16 @@ const Navbar = () => {
                   </li>
                 </ul>
               </li>
-            ) : (
-              <li className="nav-item">
-                <Link className="nav-link" to="/admin/login">
-                  Admin Login
-                </Link>
-              </li>
-            )}
+            ): null}
 
             <li className="nav-item">
               <Link className="nav-link" to="/auth">
-                Login
+                Signin
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/auth">
+                Signup
               </Link>
             </li>
           </ul>
