@@ -18,13 +18,13 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: "https://donate-hub-system-x4f5.vercel.app/",
+    origin: "https://donate-hub-system-ovgq.vercel.app",
     methods: ["GET", "POST"],
     credentials: true,
   },
 });
 
-app.use(cors({ origin: "https://donate-hub-system-x4f5.vercel.app/", credentials: true }));
+app.use(cors({ origin: "https://donate-hub-system-ovgq.vercel.app", credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -185,7 +185,7 @@ app.post('/api/v1/user/password/forgot', async (req, res) => {
     const resetToken = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '10m' });
 
     // Send reset link via email
-    const resetLink = `http://localhost:5173/reset-password?token=${resetToken}`;
+    const resetLink = `https://donate-hub-system-ovgq.vercel.app/reset-password?token=${resetToken}`;
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: email,
@@ -224,7 +224,7 @@ app.post('/api/v1/user/password/reset', async (req, res) => {
 });
 
 // Protected Donation Endpoint
-app.post('/api/donation', authenticate, upload.single('photo'), async (req, res) => {
+app.post('/api/donation', upload.single('photo'), async (req, res) => {
   try {
     const donorId = req.user.userId;
     const { category, itemName, description, condition, location, type } = req.body;
@@ -313,7 +313,7 @@ app.get('/api/leaderboard', async (req, res) => {
 });
 
 // Request Item
-app.post('/api/request-item/:id', authenticate, async (req, res) => {
+app.post('/api/request-item/:id', async (req, res) => {
   const { id } = req.params; // Donation ID
   const { receiverId, deliveryOption } = req.body; // Receiver's user ID and delivery option
 
@@ -395,7 +395,7 @@ const calculateDistance = (lat1, lon1, lat2, lon2) => {
 };
 
 // New endpoint to fetch nearby NGOs
-app.get('/api/ngos/nearby', authenticate, async (req, res) => {
+app.get('/api/ngos/nearby', async (req, res) => {
   const { location } = req.query; // Expecting "lat,lon" format
   if (!location || !location.includes(',')) {
     return res.status(400).json({ error: 'Invalid location format. Expected "latitude,longitude".' });
@@ -418,7 +418,7 @@ app.get('/api/ngos/nearby', authenticate, async (req, res) => {
 });
 
 // Updated Request Item endpoint
-app.post('/api/request-item/:id', authenticate, async (req, res) => {
+app.post('/api/request-item/:id', async (req, res) => {
   const { id } = req.params; // Donation ID
   const { receiverId, deliveryOption, ngoId } = req.body; // Added ngoId
 
@@ -499,7 +499,7 @@ app.get('/api/leaderboard/weekly', async (req, res) => {
 });
 
 // Fetch user profile
-app.get("/api/v1/user/me", authenticate, async (req, res) => {
+app.get("/api/v1/user/me", async (req, res) => {
   try {
     const user = await User.findById(req.user.userId).select("-password");
     res.json({ user });
@@ -509,7 +509,7 @@ app.get("/api/v1/user/me", authenticate, async (req, res) => {
 });
 
 // Update user profile
-app.put("/api/v1/user/me/update", authenticate, async (req, res) => {
+app.put("/api/v1/user/me/update", async (req, res) => {
   try {
     const user = await User.findByIdAndUpdate(req.user.userId, req.body, { new: true }).select("-password");
     res.json({ user });
